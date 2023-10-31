@@ -1,0 +1,6 @@
+name: DiscordSync
+main: discordSync.DiscordSync
+author: TheJogMan
+load: STARTUP
+version: 1.0
+api-version: 1.20
