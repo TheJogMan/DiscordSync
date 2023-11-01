@@ -8,5 +8,6 @@
     <orderEntry type="jdk" jdkName="21" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="spigot-api-1.20.2-R0.1-SNAPSHOT-shaded" level="project" />
+    <orderEntry type="library" exported="" name="JDA-5.0.0-beta.17-withDependencies" level="project" />
   </component>
 </module>
