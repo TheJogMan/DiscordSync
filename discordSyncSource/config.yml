@@ -1,2 +1,10 @@
+#time in seconds before a link process expires
+confirmation-timeout: 300
+
 discord-bot:
+  #bot token for connecting to discord's bot API, can be retrieved from the discord developer portal
   token: "Not set."
+
+  #id of the discord server to sync with, once the bot is running and added to your server an
+  #administrator can use the /get-guild-id command to get this ID
+  guild-id: 0

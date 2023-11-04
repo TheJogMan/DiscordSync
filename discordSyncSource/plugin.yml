@@ -4,3 +4,17 @@ author: TheJogMan
 load: STARTUP
 version: 1.0
 api-version: 1.20
+softdepend:
+  - Essentials
+commands:
+  link-account:
+    description: "Used to link a users minecraft and discord accounts."
+    usage: /<command> <code>
+  view-profile:
+    description: "Displays a user's profile."
+    usage: /<command> <player name>
+    permission: view-profile
+permissions:
+  view-profile:
+    description: "Allows the view-profile command"
+    default: op

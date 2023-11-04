@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="api-5.4-sources">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../jars/luckperms/api-5.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../jars/luckperms/api-5.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

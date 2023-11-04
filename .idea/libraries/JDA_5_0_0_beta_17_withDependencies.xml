@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="JDA-5.0.0-beta.17-withDependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../jars/JDA/5/17/JDA-5.0.0-beta.17-withDependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../jars/JDA/5/17/JDA-5.0.0-beta.17-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../jars/JDA/5/JDA-5.0.0-alpha.13-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
