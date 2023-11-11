@@ -45,6 +45,12 @@ public class User
 		data = YamlConfiguration.loadConfiguration(dataFile());
 	}
 	
+	/**
+	 * Gets the user with the given minecraft name
+	 * @param plugin
+	 * @param name
+	 * @return
+	 */
 	public static User getByPlayerName(DiscordSync plugin, String name)
 	{
 		File[] users = plugin.userDataDirectory().listFiles();
@@ -57,6 +63,12 @@ public class User
 		return null;
 	}
 	
+	/**
+	 * Gets the user with the given discord ID
+	 * @param plugin
+	 * @param discordUUID
+	 * @return
+	 */
 	public static User getByPlayerDiscordID(DiscordSync plugin, long discordUUID)
 	{
 		File[] users = plugin.userDataDirectory().listFiles();
@@ -69,6 +81,10 @@ public class User
 		return null;
 	}
 	
+	/**
+	 * Sets the discord ID for this user
+	 * @param discordUuid
+	 */
 	public void setDiscordUuid(long discordUuid)
 	{
 		data.set(DISCORD_UUID, discordUuid);
@@ -118,11 +134,20 @@ public class User
 		}
 	}
 	
+	/**
+	 * Gives a role to this user in both Discord and Minecraft
+	 * @param role
+	 */
 	public void giveRole(Role role)
 	{
 		giveRole(role, Side.BOTH);
 	}
 	
+	/**
+	 * Gives a role to this user on the specified side
+	 * @param role
+	 * @param side
+	 */
 	public void giveRole(Role role, Side side)
 	{
 		if (side.appliesToDiscord)
@@ -139,11 +164,20 @@ public class User
 		}
 	}
 	
+	/**
+	 * Takes a role away from this user in both Discord and Minecraft
+	 * @param role
+	 */
 	public void removeRole(Role role)
 	{
 		removeRole(role, Side.BOTH);
 	}
 	
+	/**
+	 * Takes a role away from this user on the specified side
+	 * @param role
+	 * @param side
+	 */
 	public void removeRole(Role role, Side side)
 	{
 		if (side.appliesToDiscord)
@@ -176,26 +210,46 @@ public class User
 		}
 	}
 	
+	/**
+	 * Gets the minecraft name this user had when they were last on the server
+	 * @return
+	 */
 	public String getLastSeenMinecraftName()
 	{
 		return data.getString(LAST_SEEN_MINECRAFT_NAME, "no name found");
 	}
 	
+	/**
+	 * Get the player object for this user if they are currently online
+	 * @return
+	 */
 	public Player getPlayer()
 	{
 		return Bukkit.getPlayer(minecraftUUID);
 	}
 	
+	/**
+	 * Get the offline player object for this user
+	 * @return
+	 */
 	public OfflinePlayer getOfflinePlayer()
 	{
 		return Bukkit.getOfflinePlayer(minecraftUUID);
 	}
 	
+	/**
+	 * Checks if this user is online
+	 * @return
+	 */
 	public boolean isOnline()
 	{
 		return getOfflinePlayer().isOnline();
 	}
 	
+	/**
+	 * Get the luck perms user for this user
+	 * @return
+	 */
 	public net.luckperms.api.model.user.User getLuckPermsUser()
 	{
 		UserManager manager = LuckPermsProvider.get().getUserManager();
@@ -205,21 +259,37 @@ public class User
 			return manager.getUser(minecraftUUID);
 	}
 	
+	/**
+	 * Check if this user has linked their discord and minecraft accounts
+	 * @return
+	 */
 	public boolean isLinked()
 	{
 		return getGuildMember() != null;
 	}
 	
+	/**
+	 * Get the discord guild member for this user
+	 * @return
+	 */
 	public Member getGuildMember()
 	{
 		return plugin.bot().guild.retrieveMemberById(getDiscordID()).complete();
 	}
 	
+	/**
+	 * Get the ID for the discord guild member for this user
+	 * @return
+	 */
 	public long getDiscordID()
 	{
 		return data.getLong(DISCORD_UUID, 0);
 	}
 	
+	/**
+	 * Get the file this user's data is stored in
+	 * @return
+	 */
 	public File dataFile()
 	{
 		return new File(plugin.userDataDirectory() + "/" + minecraftUUID + ".txt");

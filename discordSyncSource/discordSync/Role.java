@@ -14,6 +14,10 @@ public class Role
 	
 	static final ArrayList<Role> roles = new ArrayList<>();
 	
+	/**
+	 * Loads the role list from the config file
+	 * @param plugin
+	 */
 	public static void loadRoleList(DiscordSync plugin)
 	{
 		roles.clear();
@@ -26,16 +30,30 @@ public class Role
 		}
 	}
 	
+	/**
+	 * Returns the number of roles defined in the config file
+	 * @return
+	 */
 	public static int roleCount()
 	{
 		return roles.size();
 	}
 	
+	/**
+	 * Gets the role at the given index in the list
+	 * @param index
+	 * @return
+	 */
 	public static Role getRole(int index)
 	{
 		return roles.get(index);
 	}
 	
+	/**
+	 * Gets the role with the given name
+	 * @param name
+	 * @return
+	 */
 	public static Role getRoleByName(String name)
 	{
 		for (Role role : roles)
@@ -44,6 +62,11 @@ public class Role
 		return null;
 	}
 	
+	/**
+	 * Gets the role that corresponds with the given discord role
+	 * @param discordRoleID
+	 * @return
+	 */
 	public static Role getRoleByID(long discordRoleID)
 	{
 		for (Role role : roles)
@@ -52,6 +75,11 @@ public class Role
 		return null;
 	}
 	
+	/**
+	 * Gets the role that corresponds with the given luck perms group
+	 * @param luckPermsGroupName
+	 * @return
+	 */
 	public static Role getRoleByGroup(String luckPermsGroupName)
 	{
 		for (Role role : roles)

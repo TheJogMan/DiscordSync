@@ -22,9 +22,17 @@ public class LinkProcess
 	
 	private static final HashMap<Integer, LinkProcess> processes = new HashMap<>();
 	
-	public static LinkProcess getProcess(int key)
+	/**
+	 * Gets the link process that has the given code
+	 * <p>
+	 *     Returns null if no currently active process has the given code.
+	 * </p>
+	 * @param code
+	 * @return
+	 */
+	public static LinkProcess getProcess(int code)
 	{
-		LinkProcess process = processes.get(key);
+		LinkProcess process = processes.get(code);
 		if (process == null || !process.valid())
 			return null;
 		else
@@ -67,21 +75,37 @@ public class LinkProcess
 		return confirmationCode;
 	}
 	
+	/**
+	 * Gets the discord guild member that initiated this link process
+	 * @return
+	 */
 	public Member initiator()
 	{
 		return initiator;
 	}
 	
+	/**
+	 * Gets the time when this process was initiated
+	 * @return
+	 */
 	public long getInitiationTime()
 	{
 		return initiationTime;
 	}
 	
+	/**
+	 * Checks if this process is still active
+	 * @return
+	 */
 	public boolean valid()
 	{
 		return !completed && (System.currentTimeMillis() - initiationTime) < confirmationTimeout(plugin);
 	}
 	
+	/**
+	 * Complete this link process with the given minecraft player
+	 * @param player
+	 */
 	public void complete(Player player)
 	{
 		completed = true;

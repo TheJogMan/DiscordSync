@@ -54,11 +54,19 @@ public class DiscordSync extends JavaPlugin implements Listener
 		user.sync();
 	}
 	
+	/**
+	 * Provides the instance of the discord bot
+	 * @return
+	 */
 	public DiscordBot bot()
 	{
 		return bot;
 	}
 	
+	/**
+	 * Gets the folder that user data files are stored in
+	 * @return
+	 */
 	public File userDataDirectory()
 	{
 		return new File(getDataFolder() + "/userData");

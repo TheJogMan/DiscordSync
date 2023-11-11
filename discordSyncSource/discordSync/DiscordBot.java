@@ -172,7 +172,7 @@ public class DiscordBot extends ListenerAdapter implements Listener
 	public void stop()
 	{
 		if (!status.canStop())
-			throw new IllegalStateException("Can't stop discord bot in its current state.");
+			return;
 		
 		if (jda != null)
 		{
