@@ -14,6 +14,10 @@ commands:
     description: "Displays a user's profile."
     usage: /<command> <player name>
     permission: view-profile
+  list-profiles:
+    description: "Lists all the profiles on this server."
+    usage: /<command>
+    permission: view-profile
 permissions:
   view-profile:
     description: "Allows the view-profile command"

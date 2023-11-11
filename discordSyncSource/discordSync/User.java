@@ -307,6 +307,22 @@ public class User
 		}
 	}
 	
+	/**
+	 * Gets all the users on this server
+	 * @param plugin
+	 * @return
+	 */
+	public static User[] getUsers(DiscordSync plugin)
+	{
+		File[] userFiles = plugin.userDataDirectory().listFiles();
+		User[] users = new User[userFiles.length];
+		for (int index = 0; index < users.length; index++)
+		{
+			users[index] = new User(plugin, UUID.fromString(userFiles[index].getName().substring(0, userFiles[index].getName().length() - 4)));
+		}
+		return users;
+	}
+	
 	private static String getDefaultUserData()
 	{
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("/UserDataTemplate.yml"));
