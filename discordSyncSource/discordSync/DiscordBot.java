@@ -48,8 +48,15 @@ public class DiscordBot extends ListenerAdapter implements Listener
 		addCommand("get-guild-id", "Gets the ID for this discord server.", true, DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR),
 		(event) ->
 		{
-			event.reply(event.getGuild().getId()).setEphemeral(true).queue();
+			event.reply("This server's ID is `" + event.getGuild().getIdLong() + "'").setEphemeral(true).queue();
 		});
+		
+		addCommand("get-role-id", "Gets the ID for a role.", true, DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR),
+		(event) ->
+		{
+			net.dv8tion.jda.api.entities.Role role = event.getOption("role").getAsRole();
+			event.reply(role.getAsMention() + "'s ID is `" + role.getIdLong() + "`").setEphemeral(true).queue();
+		}, new OptionData(OptionType.ROLE, "role", "The role to get the ID of.", true));
 		
 		addCommand("link-account", "Begins the process of linking your minecraft account with your discord account.", false, DefaultMemberPermissions.enabledFor(Permission.EMPTY_PERMISSIONS),
 		(event) ->
@@ -63,7 +70,7 @@ public class DiscordBot extends ListenerAdapter implements Listener
 		(event) ->
 		{
 			Member member = event.getOption("user").getAsMember();
-			User user = User.getByDiscordID(plugin, member.getIdLong());
+			User user = User.getByPlayerDiscordID(plugin, member.getIdLong());
 			if (user == null)
 				event.reply("This person hasn't linked their minecraft account.").queue();
 			else

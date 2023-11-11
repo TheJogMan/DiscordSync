@@ -4,8 +4,8 @@ author: TheJogMan
 load: STARTUP
 version: 1.0
 api-version: 1.20
-softdepend:
-  - Essentials
+depend:
+  - LuckPerms
 commands:
   link-account:
     description: "Used to link a users minecraft and discord accounts."

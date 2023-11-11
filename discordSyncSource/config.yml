@@ -8,3 +8,15 @@ discord-bot:
   #id of the discord server to sync with, once the bot is running and added to your server an
   #administrator can use the /get-guild-id command to get this ID
   guild-id: 0
+
+#List of the roles to sync between discord and minecraft
+#you can get a discord role's id with the /get-role-id <role> command
+#example
+#roles:
+#  role1:
+#    discord-role-id: 0
+#    luck-perms-group-name: "group1"
+#  role2:
+#    discord-role-id: 0
+#    luck-perms-group-name: "group2"
+roles:

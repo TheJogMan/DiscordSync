@@ -10,30 +10,25 @@ import java.io.*;
 
 public class DiscordSync extends JavaPlugin implements Listener
 {
-	public static final String DISCORD_BOT_TOKEN = "discord-bot.token";
 	final DiscordBot bot = new DiscordBot(this);
 	
 	@Override
 	public void onEnable()
 	{
 		//configuration not set
-		if (!getConfig().isSet(DISCORD_BOT_TOKEN))
+		if (!getConfig().isSet(DiscordBot.TOKEN))
 		{
 			saveDefaultConfig();
 		}
+		
 		bot.enable();
 		bot.start();
+		
+		Role.loadRoleList(this);
 		
 		//ensure userData directory exists
 		if (!userDataDirectory().exists() || !userDataDirectory().isDirectory())
 			userDataDirectory().mkdir();
-		
-		//perform sync for all players currently on the server
-		for (Player player : Bukkit.getOnlinePlayers())
-		{
-			User user = new User(this, player.getUniqueId());
-			user.sync();
-		}
 		
 		Bukkit.getPluginManager().registerEvents(this, this);
 		
@@ -41,6 +36,14 @@ public class DiscordSync extends JavaPlugin implements Listener
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, LinkProcess::cull, 0, 20);
 		
 		this.getCommand("link-account").setExecutor(new LinkProcess.LinkAccountCommand());
+		this.getCommand("view-profile").setExecutor(new User.ViewProfileCommand(this));
+		
+		//perform sync for all players currently on the server
+		for (Player player : Bukkit.getOnlinePlayers())
+		{
+			User user = new User(this, player.getUniqueId());
+			user.sync();
+		}
 	}
 	
 	@EventHandler

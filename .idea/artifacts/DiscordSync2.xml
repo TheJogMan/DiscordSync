@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="DiscordSync2">
-    <output-path>$PROJECT_DIR$/../../../../MinecraftServerFiles/1.20.2 Test Server/plugins</output-path>
+    <output-path>D:/1.20.2 Test Server/plugins</output-path>
     <root id="archive" name="DiscordSync.jar">
       <element id="module-output" name="DiscordSync" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../jars/JDA/5/17/JDA-5.0.0-beta.17-withDependencies.jar" path-in-jar="/" />
