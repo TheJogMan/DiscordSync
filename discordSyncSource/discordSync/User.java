@@ -1,6 +1,7 @@
 package discordSync;
 
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.exceptions.*;
 import net.luckperms.api.*;
 import net.luckperms.api.model.group.*;
 import net.luckperms.api.model.user.*;
@@ -8,7 +9,6 @@ import net.luckperms.api.node.*;
 import net.luckperms.api.query.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
-import org.bukkit.configuration.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.entity.*;
 import org.jetbrains.annotations.*;
@@ -34,10 +34,10 @@ public class User
 		{
 			try
 			{
-				data.loadFromString(getDefaultUserData());
+				data = YamlConfiguration.loadConfiguration(new StringReader(getDefaultUserData()));
 				data.save(dataFile());
 			}
-			catch (InvalidConfigurationException | IOException e)
+			catch (IOException e)
 			{
 				throw new RuntimeException(e);
 			}
@@ -109,7 +109,7 @@ public class User
 		if (member == null)
 		{
 			if (player.isOnline())
-				player.getPlayer().sendMessage("§b[DiscordSync]§r You need to link your minecraft and discord accounts, run the §b/link-account§r command in discord to begin the process.");
+				player.getPlayer().sendMessage("§6[DiscordSync]§r You need to link your minecraft and discord accounts, run the §b/link-account§r command in discord to begin the process.");
 			return;
 		}
 		
@@ -291,7 +291,14 @@ public class User
 	 */
 	public Member getGuildMember()
 	{
-		return plugin.bot().guild.retrieveMemberById(getDiscordID()).complete();
+		try
+		{
+			return plugin.bot().guild.retrieveMemberById(getDiscordID()).complete();
+		}
+		catch (ErrorResponseException e)
+		{
+			return null;
+		}
 	}
 	
 	/**
