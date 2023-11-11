@@ -90,7 +90,7 @@ public class DiscordSync extends JavaPlugin implements Listener
 		for (Player player : Bukkit.getOnlinePlayers())
 		{
 			if (player.isOp())
-				player.sendMessage("[DiscordSync] " + message);
+				player.sendMessage("§6[DiscordSync]§r " + message);
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class DiscordSync extends JavaPlugin implements Listener
 		{
 			User[] users = User.getUsers(plugin);
 			StringBuilder builder = new StringBuilder();
-			builder.append("§6Users: (MC Name: Linked)§r");
+			builder.append("§6[DiscordSync] Users: (MC Name: Linked)§r");
 			for (User user : users)
 				builder.append("\n").append(user.getLastSeenMinecraftName()).append(": ").append(user.isLinked() ? "Yes" : "No");
 			builder.append("\n§6Run the §b/view-profile <MC Name>§6 command to view more information about a profile.");

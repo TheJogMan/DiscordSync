@@ -109,7 +109,7 @@ public class User
 		if (member == null)
 		{
 			if (player.isOnline())
-				player.getPlayer().sendMessage("[DiscordSync] You need to link your minecraft and discord accounts, run the §b/link-account§r command in discord to begin the process.");
+				player.getPlayer().sendMessage("§b[DiscordSync]§r You need to link your minecraft and discord accounts, run the §b/link-account§r command in discord to begin the process.");
 			return;
 		}
 		
@@ -132,6 +132,23 @@ public class User
 				removeRole(role, Side.MINECRAFT);
 			}
 		}
+	}
+	
+	/**
+	 * Gets the currently synced roles for this user
+	 * @return
+	 */
+	public Role[] getRoles()
+	{
+		List<net.dv8tion.jda.api.entities.Role> discordRoles = getGuildMember().getRoles();
+		ArrayList<Role> roles = new ArrayList<>();
+		for (net.dv8tion.jda.api.entities.Role discordRole : discordRoles)
+		{
+			Role role = Role.getRoleByID(discordRole.getIdLong());
+			if (role != null)
+				roles.add(role);
+		}
+		return roles.toArray(new Role[0]);
 	}
 	
 	/**
@@ -348,17 +365,27 @@ public class User
 				{
 					if (user.isLinked())
 					{
-						sender.sendMessage("[DiscordSync] " + user.getLastSeenMinecraftName() + " is @" + user.getGuildMember().getUser().getName() + " on Discord, currently with the display name "
-										   + user.getGuildMember().getEffectiveName() + ".");
+						StringBuilder builder = new StringBuilder();
+						builder.append("§6[DiscordSync]§r ").append(user.getLastSeenMinecraftName()).append("§b is§r @").append(user.getGuildMember().getUser().getName())
+							   .append(" §bon Discord, currently with the display name§r ").append(user.getGuildMember().getEffectiveName()).append("§b.\n§6Currently synced roles: (Discord Role: LuckPerms Group)§r");
+						Role[] roles = user.getRoles();
+						for (Role role : roles)
+						{
+							builder.append('\n').append(role.getDiscordRole().getName()).append(": ").append(role.getLuckPermsGroup().getName());
+						}
+						if (roles.length == 0)
+							builder.append("\nNone.");
+						
+						sender.sendMessage(builder.toString());
 					}
 					else
-						sender.sendMessage("[DiscordSync] " + user.getLastSeenMinecraftName() + " has not linked their accounts.");
+						sender.sendMessage("§6[DiscordSync]§r " + user.getLastSeenMinecraftName() + "§b has not linked their accounts.");
 				}
 				else
-					sender.sendMessage("[DiscordSync] There is no profile with that name, the player has either never joined the server before or the name was not typed correctly.");
+					sender.sendMessage("§6[DiscordSync]§b There is no profile with that name, the player has either never joined the server before or the name was not typed correctly.");
 				return true;
 			}
-			sender.sendMessage("[DiscordSync] You must provide a player name.");
+			sender.sendMessage("§6[DiscordSync]§b You must provide a player name.");
 			return false;
 		}
 	}

@@ -75,8 +75,17 @@ public class DiscordBot extends ListenerAdapter implements Listener
 				event.reply("This person hasn't linked their minecraft account.").queue();
 			else
 			{
-				event.reply(member.getAsMention() + "'s minecraft UUID is `" + user.getOfflinePlayer().getUniqueId() + "` and their name was `" + user.getLastSeenMinecraftName() + "` when " +
-							"they last joined the minecraft server.").setEphemeral(true).queue();
+				StringBuilder builder = new StringBuilder();
+				builder.append(member.getAsMention()).append("'s minecraft UUID is `").append(user.getOfflinePlayer().getUniqueId()).append("` and their name was `").append(user.getLastSeenMinecraftName())
+						.append("` when they last joined the minecraft server.\nCurrently linked roles: (Discord Role: LuckPerms Group)");
+				Role[] roles = user.getRoles();
+				for (Role role : roles)
+				{
+					builder.append('\n').append(role.getDiscordRole().getAsMention()).append(": ").append(role.getLuckPermsGroup().getName());
+				}
+				if (roles.length == 0)
+					builder.append("\nNone.");
+				event.reply(builder.toString()).setEphemeral(true).queue();
 			}
 		}, new OptionData(OptionType.USER, "user", "The user who's profile you want to view.", true));
 		

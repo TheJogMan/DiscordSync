@@ -111,7 +111,7 @@ public class LinkProcess
 		completed = true;
 		User user = new User(plugin, player.getUniqueId());
 		user.setDiscordUuid(initiator.getIdLong());
-		player.sendMessage("[DiscordSync] Linked to " + initiator.getEffectiveName() + " for syncing.");
+		player.sendMessage("§6[DiscordSync]§b Linked to §6" + initiator.getEffectiveName() + "§b for syncing.");
 		initiator.getUser().openPrivateChannel().onSuccess(channel -> channel.sendMessage("Linked to " + player.getName() + " for syncing.").queue()).queue();
 	}
 	
@@ -122,7 +122,7 @@ public class LinkProcess
 		{
 			if (!(sender instanceof Player))
 			{
-				sender.sendMessage("[DiscordSync] You must be a player to use this command.");
+				sender.sendMessage("§6[DiscordSync]§b You must be a player to use this command.");
 				return false;
 			}
 			
@@ -135,7 +135,7 @@ public class LinkProcess
 					if (process != null)
 						process.complete((Player)sender);
 					else
-						sender.sendMessage("[DiscordSync] That code does not match a valid and active link process, make sure you typed the code correctly and try again. If your code has expired " +
+						sender.sendMessage("§6[DiscordSync]§b That code does not match a valid and active link process, make sure you typed the code correctly and try again. If your code has expired " +
 										   "or you have lost the code, just re-run the command in discord to get a new code.");
 					return true;
 				}
@@ -144,7 +144,7 @@ public class LinkProcess
 				
 				}
 			}
-			sender.sendMessage("[DiscordSync] You must provide a valid code.");
+			sender.sendMessage("§6[DiscordSync]§b You must provide a valid code.");
 			return false;
 		}
 	}
